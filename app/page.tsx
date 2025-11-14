@@ -26,23 +26,23 @@ export default function Home() {
   const features = [
     {
       icon: <Leaf className="h-8 w-8" />,
-      title: 'Eco-Friendly',
-      description: 'Sustainable travel that respects nature and local communities',
+      title: 'Écologique',
+      description: 'Voyages durables qui respectent la nature et les communautés locales',
     },
     {
       icon: <Users className="h-8 w-8" />,
-      title: 'Expert Guides',
-      description: 'Experienced guides passionate about conservation',
+      title: 'Guides Experts',
+      description: 'Des guides expérimentés passionnés par la conservation',
     },
     {
       icon: <Heart className="h-8 w-8" />,
-      title: 'Local Support',
-      description: 'Direct support for local communities and wildlife',
+      title: 'Soutien Local',
+      description: 'Soutien direct aux communautés locales et à la faune',
     },
     {
       icon: <Globe className="h-8 w-8" />,
-      title: 'Global Reach',
-      description: 'Explore the most stunning natural destinations worldwide',
+      title: 'Portée Mondiale',
+      description: 'Explorez les plus belles destinations naturelles du monde',
     },
   ];
 
@@ -51,27 +51,27 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection
-          title={content?.heroTitle || 'Explore Nature with Purpose'}
+          title={content?.heroTitle || 'Explorez la nature avec un objectif'}
           description={
             content?.heroDescription ||
-            'Discover breathtaking destinations while supporting conservation efforts'
+            'Découvrez des destinations à couper le souffle tout en soutenant les efforts de conservation'
           }
           backgroundImage="/beautiful-nature-landscape.jpg"
-          cta={{ text: 'Start Exploring', href: '/destinations' }}
+          cta={{ text: 'Commencer l\'exploration', href: '/destinations' }}
         />
 
         <FeatureSection
-          title="Why Choose Radiata"
-          description="Experience travel that makes a difference"
+          title="Pourquoi choisir Radiata"
+          description="Vivez un voyage qui fait la différence"
           features={features}
         />
 
         <section className="py-20 px-4 bg-gradient-to-b from-white via-slate-50 to-white">
           <div className="mx-auto max-w-7xl">
             <div className="mb-16 text-center">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-balance" style={{ color: '#7ac243' }}>Popular Destinations</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-balance" style={{ color: '#7ac243' }}>Destinations Populaires</h2>
               <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                Handpicked adventures for every explorer. Discover unforgettable experiences in nature's most breathtaking locations.
+                Des aventures soigneusement sélectionnées pour chaque explorateur. Découvrez des expériences inoubliables dans les lieux les plus spectaculaires de la nature.
               </p>
             </div>
 
@@ -98,18 +98,18 @@ export default function Home() {
           <div className="absolute inset-0 opacity-10" style={{ backgroundColor: '#40e0d0' }}></div>
           <div className="mx-auto max-w-3xl text-center relative z-10">
             <div className="mb-6 inline-block px-4 py-2 rounded-full" style={{ backgroundColor: '#40e0d0', color: 'white' }}>
-              <span className="text-sm font-semibold">Our Mission</span>
+              <span className="text-sm font-semibold">Notre mission</span>
             </div>
-            <h2 className="text-4xl font-bold mb-6" style={{ color: '#7ac243' }}>Making Travel Meaningful</h2>
+            <h2 className="text-4xl font-bold mb-6" style={{ color: '#7ac243' }}>Rendre les voyages significatifs</h2>
             <p className="text-lg text-slate-700 mb-8 leading-relaxed">
-              At Radiata Explorer, we believe that travel should inspire, educate, and make a positive impact. We partner with local communities and conservation organizations to create meaningful experiences while protecting the natural world for future generations.
+              Chez Radiata Explorer, nous croyons que le voyage doit inspirer, éduquer et avoir un impact positif. Nous nous associons à des communautés locales et à des organisations de conservation pour créer des expériences significatives tout en protégeant le monde naturel pour les générations futures.
             </p>
             <a
               href="/contact"
               className="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-semibold text-white transition-all hover:gap-3"
               style={{ backgroundColor: '#7ac243' }}
             >
-              Get in Touch <ArrowRight className="h-5 w-5" />
+              Nous contacter <ArrowRight className="h-5 w-5" />
             </a>
           </div>
         </section>
@@ -119,15 +119,15 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
               <div>
                 <div className="text-4xl font-bold mb-2">500+</div>
-                <p className="text-white/90">Destinations Explored</p>
+                <p className="text-white/90">Destinations explorées</p>
               </div>
               <div>
                 <div className="text-4xl font-bold mb-2">50K+</div>
-                <p className="text-white/90">Happy Travelers</p>
+                <p className="text-white/90">Voyageurs heureux</p>
               </div>
               <div>
                 <div className="text-4xl font-bold mb-2">100%</div>
-                <p className="text-white/90">Eco-Friendly Certified</p>
+                <p className="text-white/90">Certifiés écologiques</p>
               </div>
             </div>
           </div>

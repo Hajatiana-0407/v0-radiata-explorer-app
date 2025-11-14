@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAppDispatch, useAppSelector } from '@/hooks/use-app-selector';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
+import { useAppSelector } from '@/hooks/use-app-selector';
 import { loginAdmin } from '@/store/slices/authSlice';
 import { CustomInput } from '@/components/ui/custom-input';
 import {
@@ -29,8 +30,8 @@ export function LoginForm() {
   const validateForm = () => {
     const errors: Record<string, string> = {};
     if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/))
-      errors.email = 'Valid email is required';
-    if (password.length < 6) errors.password = 'Password must be at least 6 characters';
+      errors.email = 'Un email valide est requis';
+    if (password.length < 6) errors.password = 'Le mot de passe doit contenir au moins 6 caractères';
 
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
@@ -60,7 +61,7 @@ export function LoginForm() {
         />
       </InputGroup>
 
-      <InputGroup label="Password" required error={fieldErrors.password}>
+      <InputGroup label="Mot de passe" required error={fieldErrors.password}>
         <CustomInput
           type="password"
           placeholder="••••••••"
@@ -73,10 +74,10 @@ export function LoginForm() {
       <Button type="submit" disabled={loading} className="w-full">
         {loading ? (
           <>
-            <LoaderSmall /> Signing In...
+            <LoaderSmall /> Connexion en cours...
           </>
         ) : (
-          'Sign In'
+          'Se connecter'
         )}
       </Button>
     </form>
