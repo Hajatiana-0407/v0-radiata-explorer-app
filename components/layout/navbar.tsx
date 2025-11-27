@@ -22,24 +22,31 @@ export function Navbar() {
   return (
     <>
       {/* Top Contact Bar */}
-      <div className="bg-white border-b border-slate-200 hidden md:block">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between text-sm">
+      <div className="hidden md:block" style={{ backgroundColor: "#7ac243" }}>
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-6">
-            <a href="tel:+33123456789" className="flex items-center gap-2 text-slate-600 hover:text-[#7ac243]">
+            <a
+              href="tel:+33123456789"
+              className="flex items-center gap-2 text-white hover:text-[#40e0d0] transition-colors font-medium"
+            >
               <Phone className="h-4 w-4" />
               <span>+33 (0)1 23 45 67 89</span>
             </a>
-            <a href="mailto:info@radiata.com" className="flex items-center gap-2 text-slate-600 hover:text-[#7ac243]">
+            <span className="text-white/30">|</span>
+            <a
+              href="mailto:info@radiata.com"
+              className="flex items-center gap-2 text-white hover:text-[#40e0d0] transition-colors font-medium"
+            >
               <Mail className="h-4 w-4" />
               <span>info@radiata.com</span>
             </a>
           </div>
           <div className="flex items-center gap-4">
-            <Link href="/admin/login" className="text-slate-600 hover:text-[#7ac243] font-medium">
+            <Link href="/admin/login" className="text-white hover:text-[#40e0d0] font-medium transition-colors">
               Connexion
             </Link>
-            <span className="text-slate-400">|</span>
-            <Link href="/admin" className="text-slate-600 hover:text-[#7ac243] font-medium">
+            <span className="text-white/30">|</span>
+            <Link href="/admin" className="text-white hover:text-[#40e0d0] font-medium transition-colors">
               Admin
             </Link>
           </div>

@@ -1,26 +1,23 @@
-'use client';
+"use client"
 
-import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/hooks/use-app-selector';
-import { fetchDestinations, setFilters, setPage } from '@/store/slices/destinationsSlice';
-import { Navbar } from '@/components/layout/navbar';
-import { Footer } from '@/components/layout/footer';
-import { DestinationCard } from '@/components/cards/destination-card';
-import { CustomInput } from '@/components/ui/custom-input';
-import { CustomSelect } from '@/components/ui/custom-select';
-import { Loader } from '@/components/ui/loader';
-import { SkeletonCard } from '@/components/ui/skeleton';
-import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight, Search } from 'lucide-react';
+import { useEffect, useState } from "react"
+import { useAppDispatch, useAppSelector } from "@/hooks/use-app-selector"
+import { fetchDestinations, setFilters, setPage } from "@/store/slices/destinationsSlice"
+import { Navbar } from "@/components/layout/navbar"
+import { Footer } from "@/components/layout/footer"
+import { DestinationCard } from "@/components/cards/destination-card"
+import { CustomInput } from "@/components/ui/custom-input"
+import { CustomSelect } from "@/components/ui/custom-select"
+import { SkeletonCard } from "@/components/ui/skeleton"
+import { Button } from "@/components/ui/button"
+import { ChevronLeft, ChevronRight, Search } from "lucide-react"
 
 export default function DestinationsPage() {
-  const dispatch = useAppDispatch();
-  const { items, loading, error, page, totalPages, filters } = useAppSelector(
-    (state) => state.destinations
-  );
-  const [searchTerm, setSearchTerm] = useState('');
-  const [difficulty, setDifficulty] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
+  const dispatch = useAppDispatch()
+  const { items, loading, error, page, totalPages, filters } = useAppSelector((state) => state.destinations)
+  const [searchTerm, setSearchTerm] = useState("")
+  const [difficulty, setDifficulty] = useState("")
+  const [maxPrice, setMaxPrice] = useState("")
 
   useEffect(() => {
     dispatch(
@@ -29,60 +26,72 @@ export default function DestinationsPage() {
         search: filters.search,
         difficulty: filters.difficulty,
         maxPrice: filters.maxPrice,
-      }) as any
-    );
-  }, [dispatch, page, filters]);
+      }) as any,
+    )
+  }, [dispatch, page, filters])
 
   const handleSearch = () => {
-    dispatch(setFilters({ search: searchTerm, difficulty, maxPrice: maxPrice ? parseFloat(maxPrice) : null }) as any);
-  };
+    dispatch(
+      setFilters({ search: searchTerm, difficulty, maxPrice: maxPrice ? Number.parseFloat(maxPrice) : null }) as any,
+    )
+  }
 
   const handleReset = () => {
-    setSearchTerm('');
-    setDifficulty('');
-    setMaxPrice('');
-    dispatch(setFilters({ search: '', difficulty: null, maxPrice: null }) as any);
-  };
+    setSearchTerm("")
+    setDifficulty("")
+    setMaxPrice("")
+    dispatch(setFilters({ search: "", difficulty: null, maxPrice: null }) as any)
+  }
 
   return (
     <>
       <Navbar />
       <main className="min-h-screen bg-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="text-4xl font-bold mb-8">Our Destinations</h1>
+          <div className="mb-12">
+            <h1 className="text-5xl font-bold mb-3" style={{ color: "#7ac243" }}>
+              Nos Destinations
+            </h1>
+            <p className="text-lg text-slate-600">
+              Découvrez nos circuits inoubliables et préparez votre prochaine aventure
+            </p>
+          </div>
 
-          <div className="bg-card border border-border rounded-lg p-6 mb-8">
-            <h2 className="text-lg font-semibold mb-4">Search & Filter</h2>
+          <div className="bg-white border-2 border-slate-200 rounded-2xl p-8 mb-12 shadow-lg">
+            <h2 className="text-2xl font-bold mb-6" style={{ color: "#7ac243" }}>
+              Filtrer & Rechercher
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
-                <label className="text-sm font-medium mb-2 block">Search</label>
+                <label className="text-sm font-semibold mb-2 block text-slate-700">Recherche</label>
                 <div className="relative">
                   <CustomInput
-                    placeholder="Destination name..."
+                    placeholder="Destination..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
-                  <Search className="absolute right-3 top-2.5 h-5 w-5 text-muted-foreground pointer-events-none" />
+                  <Search className="absolute right-3 top-2.5 h-5 w-5" style={{ color: "#40e0d0" }} />
                 </div>
               </div>
 
               <div>
-                <label className="text-sm font-medium mb-2 block">Difficulty</label>
+                <label className="text-sm font-semibold mb-2 block text-slate-700">Difficulté</label>
                 <CustomSelect
                   value={difficulty}
                   onChange={(e) => setDifficulty(e.target.value)}
                   options={[
-                    { value: 'easy', label: 'Easy' },
-                    { value: 'moderate', label: 'Moderate' },
-                    { value: 'hard', label: 'Hard' },
+                    { value: "", label: "Toutes les difficultés" },
+                    { value: "easy", label: "Facile" },
+                    { value: "moderate", label: "Moyen" },
+                    { value: "hard", label: "Difficile" },
                   ]}
                 />
               </div>
 
               <div>
-                <label className="text-sm font-medium mb-2 block">Max Price</label>
+                <label className="text-sm font-semibold mb-2 block text-slate-700">Budget Max</label>
                 <CustomInput
-                  placeholder="e.g., 5000"
+                  placeholder="ex: 5000"
                   type="number"
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(e.target.value)}
@@ -90,11 +99,16 @@ export default function DestinationsPage() {
               </div>
 
               <div className="flex items-end gap-2">
-                <Button onClick={handleSearch} className="flex-1">
-                  Search
+                <Button onClick={handleSearch} className="flex-1 text-white" style={{ backgroundColor: "#7ac243" }}>
+                  Rechercher
                 </Button>
-                <Button onClick={handleReset} variant="outline">
-                  Reset
+                <Button
+                  onClick={handleReset}
+                  variant="outline"
+                  className="border-2 bg-transparent"
+                  style={{ borderColor: "#40e0d0", color: "#40e0d0" }}
+                >
+                  Réinitialiser
                 </Button>
               </div>
             </div>
@@ -117,10 +131,7 @@ export default function DestinationsPage() {
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                 {items.map((destination) => (
-                  <DestinationCard
-                    key={destination.id}
-                    destination={destination}
-                  />
+                  <DestinationCard key={destination.id} destination={destination} />
                 ))}
               </div>
 
@@ -153,5 +164,5 @@ export default function DestinationsPage() {
       </main>
       <Footer />
     </>
-  );
+  )
 }
