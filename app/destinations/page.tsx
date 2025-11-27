@@ -10,7 +10,7 @@ import { CustomInput } from "@/components/ui/custom-input"
 import { CustomSelect } from "@/components/ui/custom-select"
 import { SkeletonCard } from "@/components/ui/skeleton"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, Search } from "lucide-react"
+import { ChevronLeft, ChevronRight, Search, Gauge, DollarSign } from "lucide-react"
 
 export default function DestinationsPage() {
   const dispatch = useAppDispatch()
@@ -46,7 +46,7 @@ export default function DestinationsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
           <div className="mb-12">
             <h1 className="text-5xl font-bold mb-3" style={{ color: "#7ac243" }}>
@@ -57,55 +57,107 @@ export default function DestinationsPage() {
             </p>
           </div>
 
-          <div className="bg-white border-2 border-slate-200 rounded-2xl p-8 mb-12 shadow-lg">
-            <h2 className="text-2xl font-bold mb-6" style={{ color: "#7ac243" }}>
-              Filtrer & Rechercher
-            </h2>
+          <div className="bg-white border-t-4 rounded-2xl p-8 mb-12 shadow-lg" style={{ borderTopColor: "#7ac243" }}>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-10 w-1 rounded-full" style={{ backgroundColor: "#40e0d0" }}></div>
+              <h2 className="text-2xl font-bold" style={{ color: "#1a1a2e" }}>
+                Filtrer & Rechercher
+              </h2>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
-                <label className="text-sm font-semibold mb-2 block text-slate-700">Recherche</label>
+                <label className="text-sm font-semibold mb-3 flex items-center gap-2" style={{ color: "#7ac243" }}>
+                  <div
+                    className="h-8 w-8 rounded-lg flex items-center justify-center"
+                    style={{ backgroundColor: "#e8f5e0" }}
+                  >
+                    <Search className="h-4 w-4" style={{ color: "#7ac243" }} />
+                  </div>
+                  Destination
+                </label>
                 <div className="relative">
                   <CustomInput
-                    placeholder="Destination..."
+                    placeholder="Où voulez-vous aller?"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-4 border-2 focus:border-[#40e0d0] transition-colors"
                   />
-                  <Search className="absolute right-3 top-2.5 h-5 w-5" style={{ color: "#40e0d0" }} />
                 </div>
               </div>
 
               <div>
-                <label className="text-sm font-semibold mb-2 block text-slate-700">Difficulté</label>
+                <label className="text-sm font-semibold mb-3 flex items-center gap-2" style={{ color: "#7ac243" }}>
+                  <div
+                    className="h-8 w-8 rounded-lg flex items-center justify-center"
+                    style={{ backgroundColor: "#e0f7f4" }}
+                  >
+                    <Gauge className="h-4 w-4" style={{ color: "#40e0d0" }} />
+                  </div>
+                  Difficulté
+                </label>
                 <CustomSelect
                   value={difficulty}
                   onChange={(e) => setDifficulty(e.target.value)}
                   options={[
                     { value: "", label: "Toutes les difficultés" },
-                    { value: "easy", label: "Facile" },
-                    { value: "moderate", label: "Moyen" },
-                    { value: "hard", label: "Difficile" },
+                    { value: "easy", label: "🟢 Facile" },
+                    { value: "moderate", label: "🟡 Moyen" },
+                    { value: "hard", label: "🔴 Difficile" },
                   ]}
+                  className="border-2 focus:border-[#40e0d0] transition-colors"
                 />
               </div>
 
               <div>
-                <label className="text-sm font-semibold mb-2 block text-slate-700">Budget Max</label>
-                <CustomInput
-                  placeholder="ex: 5000"
-                  type="number"
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(e.target.value)}
-                />
+                <label className="text-sm font-semibold mb-3 flex items-center gap-2" style={{ color: "#7ac243" }}>
+                  <div
+                    className="h-8 w-8 rounded-lg flex items-center justify-center"
+                    style={{ backgroundColor: "#f0e8f5" }}
+                  >
+                    <DollarSign className="h-4 w-4" style={{ color: "#7ac243" }} />
+                  </div>
+                  Budget Max
+                </label>
+                <div>
+                  <CustomInput
+                    placeholder="ex: 5000"
+                    type="number"
+                    value={maxPrice}
+                    onChange={(e) => setMaxPrice(e.target.value)}
+                    className="border-2 focus:border-[#40e0d0] transition-colors"
+                  />
+                  {maxPrice && (
+                    <div className="mt-2 h-1.5 bg-gradient-to-r from-slate-200 to-slate-300 rounded-full overflow-hidden">
+                      <div
+                        className="h-full rounded-full transition-all"
+                        style={{
+                          backgroundColor: "#7ac243",
+                          width: `${Math.min((Number.parseFloat(maxPrice) / 10000) * 100, 100)}%`,
+                        }}
+                      ></div>
+                    </div>
+                  )}
+                  {maxPrice && (
+                    <p className="text-xs font-semibold mt-1" style={{ color: "#40e0d0" }}>
+                      Budget : {Number.parseFloat(maxPrice).toLocaleString("fr-FR")} €
+                    </p>
+                  )}
+                </div>
               </div>
 
               <div className="flex items-end gap-2">
-                <Button onClick={handleSearch} className="flex-1 text-white" style={{ backgroundColor: "#7ac243" }}>
+                <Button
+                  onClick={handleSearch}
+                  className="flex-1 text-white font-semibold hover:shadow-lg transition-all"
+                  style={{ backgroundColor: "#7ac243" }}
+                >
+                  <Search className="h-4 w-4 mr-2" />
                   Rechercher
                 </Button>
                 <Button
                   onClick={handleReset}
-                  variant="outline"
-                  className="border-2 bg-transparent"
+                  className="border-2 bg-transparent font-semibold hover:bg-slate-50 transition-all"
                   style={{ borderColor: "#40e0d0", color: "#40e0d0" }}
                 >
                   Réinitialiser
@@ -124,8 +176,8 @@ export default function DestinationsPage() {
             <p className="text-center text-destructive py-12">{error}</p>
           ) : items.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-muted-foreground mb-4">No destinations found matching your criteria</p>
-              <Button onClick={handleReset}>Clear Filters</Button>
+              <p className="text-muted-foreground mb-4">Aucune destination trouvée selon vos critères</p>
+              <Button onClick={handleReset}>Effacer les filtres</Button>
             </div>
           ) : (
             <>
